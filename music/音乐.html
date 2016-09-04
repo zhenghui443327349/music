@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#musicgom{
+				display: block;
+		        margin-top: 100px;
+		        margin-left: 520px;
+		        width: 300px;
+		        height: 300px;
+		        background-image: url(img/001G.png);
+		        background-size: 300px;
+		    }
+		    .audioAnimation{
+
+		        -webkit-animation: circle 5s infinite linear;
+		    }
+		
+		    @-webkit-keyframes circle{
+		        0%{ transform:rotate(0deg); }
+		        100%{ transform:rotate(360deg); }
+		    }
+		    .music{
+		    	margin-top: 100px;
+		    	margin-left: 470px;
+		    	height: 20px;
+		    }
+		    .music>progress{
+		    	float: left;
+		    	width: 400px;
+		    	height: 20px;
+		    	display: block;
+		    	border-radius: 20px;		    	
+		    }
+		    .music>span{
+		    	display: block;
+				float: left;
+				margin-left: 20px;
+		    }
+		</style>
+	</head>
+	<body>
+		<audio loop="loop" id="bgmMusic">
+			<source src="http://www.xuenb.com/tools/mp3/c5016168.mp3?500129"/>
+		</audio>
+		 <button id="musicgom" class="audioAnimation" onclick="musicP()"></button>
+		 <div class="music">
+		 <progress></progress>
+		 	<span></span>
+		 </div>
+		<script type="text/javascript">
+		    var z_audio=document.querySelector("#bgmMusic");
+		    var z_button=document.querySelector("#musicgom");
+			z_button.className = "";		    
+		    var z_span=document.querySelector(".music>span")
+		    function musicP () {
+		    	if (z_audio.paused) {
+		    		z_audio.play();
+		            z_button.className = "audioAnimation";	
+		    	}else{
+		    		z_audio.pause();
+					z_button.className = "";
+		    	}
+		    }
+			 var progress=document.querySelector("progress");
+			setInterval(function  () {
+				time();
+				progress.value=z_audio.currentTime;
+				progress.max=z_audio.duration;
+			},10);
+			function time () {
+				var m,s,ms;
+				m1=parseInt(z_audio.currentTime/60);
+				s1=parseInt(z_audio.currentTime%60);
+				m=parseInt(z_audio.duration/60);
+				s=parseInt(z_audio.duration%60);
+					z_span.innerText=m1+":"+s1+"/"+m+":"+s;
+				
+				
+			}
+		</script>
+	</body>
+</html>
